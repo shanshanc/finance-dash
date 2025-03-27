@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@theme {
+  --color-primary: #2c3e50;
+
+  --color-btn-primary: #34495e;
+}
+
+/* Any global styles that can't be handled by Tailwind */
+.card {
+  background-color: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  padding: 15px;
+  border-top: 3px solid #3498db;
+}
