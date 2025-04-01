@@ -6,15 +6,53 @@
 
 @theme {
   --color-primary: #2c3e50;
+  --color-gradient-2: #3d515f;
+  --color-gradient-3: #51656d;
+  --color-gradient-4: #67787d;
+  --color-gradient-5: #7f8c8d;
 
+  --color-subtitle: #7f8c8d;
   --color-btn-primary: #34495e;
 }
 
 /* Any global styles that can't be handled by Tailwind */
+.dashboard-body {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
+
+.full-width {
+  grid-column: span 12;
+}
+
+.third-width {
+  grid-column: span 4;
+}
+
 .card {
   background-color: #ffffff;
   border-radius: 6px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
   padding: 15px;
-  border-top: 3px solid #3498db;
+  border-top: 3px solid var(--color-gradient-4);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.metric-change.positive {
+  background-color: rgba(46, 204, 113, 0.15);
+  color: #27ae60;
+}
+.metric-change.negative {
+  background-color: rgba(231, 76, 60, 0.15);
+  color: #e74c3c;
 }

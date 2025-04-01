@@ -1,17 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
+import { DashboardContext } from "./context/DashboardContext";
 import DashboardBody from "./pages/DashboardBody";
 import './styles/global.css';
 
-const WORKER_PATH = 'https://finance-dash-worker.shanshanc-chen.workers.dev/'; 
-
 function App() {
-  const [symbol, setSymbol] = useState('AAPL');
+  const { symbol, setSymbol, period, setPeriod } = useContext(DashboardContext);
   const [inputValue, setInputValue] = useState('');
-  const workerUrl = `${WORKER_PATH}?symbol=${symbol}`;
 
-  const [chartData, setChartData] = useState(null);
-
-  // Handle input change
   const handleInputChange = (e) => {
     const value = e.target.value.toUpperCase();
     // Allows only letters, max 5 chars
@@ -20,37 +15,16 @@ function App() {
     }
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputValue.trim()) {
-      // Update symbol only on submit
       setSymbol(inputValue.trim());
-      // Reset chart data while loading new
-      setChartData(null);
     }
   };
 
-  useEffect(() => {
-    fetch(workerUrl)
-      .then((res) => res.json())
-      .then((data) => {
-        const sortedData = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
-        console.log('sortedData: ', sortedData)
-
-        setChartData({
-            labels: sortedData.map((item) => item.date),
-            datasets: [{
-                label: "Return on Equity (ROE)",
-                data: sortedData.map((item) => item.roe),
-                backgroundColor: "rgba(75, 192, 192, 0.2)",
-                borderColor: "rgba(75, 192, 192, 1)",
-                borderWidth: 1,
-            }],
-        });
-      })
-      .catch((error) => console.error('Fetch error:', error));
-  }, [symbol, workerUrl]);
+  const handlePeriodChange = (e) => {
+    setPeriod(e.target.value.toLowerCase());
+  };
 
   return (
     <div>
@@ -67,18 +41,18 @@ function App() {
               value={inputValue}
               onChange={handleInputChange}
             />
-            <select className="bg-btn-primary text-white px-4 py-2 rounded-md text-sm text-center w-full md:w-auto">
-              <option>Annual</option>
-              <option>Quarterly</option>
+            <select 
+              className="bg-btn-primary text-white px-4 py-2 rounded-md text-sm text-center w-full md:w-auto"
+              value={period}
+              onChange={handlePeriodChange}
+            >
+              <option value="annual">Annual</option>
+              <option value="quarterly">Quarterly</option>
             </select>
             <button className="bg-btn-primary text-white px-4 py-2 rounded-md text-sm w-full md:w-auto" type="submit">Go</button>
           </form>
         </div>
-        {chartData ? (
-          <DashboardBody data={chartData} />
-        ) : (
-          <p>Loading...</p>
-        )}
+        <DashboardBody />
       </div>
     </div>
   );

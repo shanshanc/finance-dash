@@ -1,0 +1,26 @@
+.metric-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.25rem; /* 20px */
+}
+
+/* 4 cards per row by default */
+.metric-row > .metric-block {
+  flex: 1 1 calc(25% - 1rem);
+  /* min-width: 200px; */
+}
+
+/* 2 cards per row on medium screens */
+@media (max-width: 1024px) {
+  .metric-row > .metric-block {
+    flex: 1 1 calc(50% - 1rem);
+  }
+}
+
+/* 1 card per row on small screens */
+@media (max-width: 640px) {
+  .metric-row > .metric-block {
+    flex: 1 1 100%;
+  }
+}

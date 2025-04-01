@@ -1,47 +1,34 @@
-import { Bar } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
+import { useContext } from "react";
+import { DashboardContext } from "../context/DashboardContext";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+import KeyMetricCard from "../components/dashboard/KeyMetricCard";
+import TrendingCardLine from "../components/dashboard/TrendingCardLine";
+import './DashboardBody.css';
 
-export default function DashboardBody({ data }) {
-  const options = {
-    scales: { y: { title: { display: true, text: "ROE" } } },
-    plugins: { title: { display: true, text: "AAPL Key Metrics" } },
-  };
+export default function DashboardBody() {
+  const { metrics, isLoading } = useContext(DashboardContext);
+
+  const hasData = metrics && metrics.length > 0;
 
   return (
     <div className="dashboard-body p-5">
-      <div className="card full-width">
+      <div className="card full-width key-metrics-row">
         <div className="card-header">
           <div>
-            <h3 className="card-title">Financial Overview</h3>
-            <p className="card-subtitle">Year ending Dec 31, 2023</p>
+            <h3 className="card-title text-base m-0 font-semibold text-left">Financial Overview</h3>
+            <p className="card-subtitle text-subtitle text-sm m-0 font-normal text-left">Year-end 2024</p>
           </div>
+        </div>
+        <div className="metric-row">
+          <KeyMetricCard className="metric-block" isPositive={true} str={{metricLabel: "Net Income", metricValue: "$97.5B", metricChange: "+6.3% YoY"}} />
+          <KeyMetricCard className="metric-block" isPositive={true} str={{metricLabel: "EPS", metricValue: "6.14", metricChange: "+9.2% YoY"}} />
+          <KeyMetricCard className="metric-block" isPositive={false} str={{metricLabel: "P/E Ratio", metricValue: "28.4", metricChange: "-2.1% YoY"}} />
+          <KeyMetricCard className="metric-block" isPositive={false} str={{metricLabel: "Debt to Assets", metricValue: "0.32", metricChange: "-0.05% YoY"}} />
         </div>
       </div>
-      <div className="card third-width profit">
-        <div className="card-header">
-          <div>
-            <h3 className="card-title">Gross Profit Ratio</h3>
-            <p className="card-subtitle">毛利率</p>
-          </div>
-        </div>
-        <div className="metric-value">43.2%</div>
-        <span className="metric-change positive">1.5% YoY</span>
-        <div className="chart-container">
-          <div style={{ maxWidth: "800px", margin: "20px auto" }}>
-            <Bar data={data} options={options} />
-          </div>
-        </div>
-      </div>
+      {hasData && <TrendingCardLine data={metrics.find((item) => item.id === "roe")} isLoading={isLoading} />}
+      {hasData && <TrendingCardLine data={metrics.find((item) => item.id === "eps")} isLoading={isLoading} />}
+      
     </div>
   );
 }
