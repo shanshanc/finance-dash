@@ -19,7 +19,7 @@ const customCanvasBackgroundColor = {
 // Register the custom plugin
 ChartJS.register(customCanvasBackgroundColor);
 
-const LineChart = ({ data }) => {
+const LineChart = ({ data, isLoading }) => {
   const options = {
     responsive: true,
     maintainAspectRatio: false,

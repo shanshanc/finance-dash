@@ -24,11 +24,11 @@ const Header = ({ market }) => {
   const handlePeriodChange = (e) => {
     setPeriod(e.target.value.toLowerCase());
   };
-  
+
   return (
       <div className="header">
           <div className="dashboard-header flex flex-col md:flex-row justify-between items-center rounded-lg px-6 py-4 bg-primary text-white gap-4">
-          <h2 className="text-2xl font-bold">Financial Dashboard</h2>
+          <h2 className="text-2xl font-bold">{market === 'TW' ? 'TW' : 'US'} Stock Market</h2>
           <form className="dashboard-controls flex flex-col md:flex-row gap-4 w-full md:w-auto" onSubmit={handleSubmit}>
             <input 
               type="text" 

@@ -1,16 +1,15 @@
 
-const KeyMetricCard = ({ str, isPositive }) => {
-  const { metricLabel, metricValue, metricChange } = str;
+const KeyMetricCard = ({ isPositive, label, value, change }) => {
   return (
     <div className="metric-block flex-1 text-center">
       <div
-        className="metric-label text-sm text-subtitle">{metricLabel}
+        className="metric-label text-sm text-subtitle">{label}
       </div>
       <div
-        className="metric-value mx-0 my-2.5 text-3xl font-bold text-primary">{metricValue}
+        className="metric-value mx-0 my-2.5 text-3xl font-bold text-primary">{value}
       </div>
       <span
-        className={`metric-change ${isPositive ? 'positive' : 'negative'}`}>{metricChange}
+        className={`metric-change ${isPositive ? 'positive' : 'negative'}`}>{change}
       </span>
     </div>
   );

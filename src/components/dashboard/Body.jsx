@@ -2,13 +2,13 @@ import { useContext } from "react";
 import { DashboardContext } from "../../context/DashboardContext";
 
 import KeyMetricCard from "./KeyMetricCard";
-import TrendingCardLine from "./TrendingCardLine";
+import TrendingCard from "./TrendingCard";
 import './Body.css';
 
 export default function Body() {
   const { metrics, isLoading } = useContext(DashboardContext);
 
-  const hasData = metrics && metrics.length > 0;
+  const summaryMetrics = ['netIncome', 'eps', 'peRatio', 'debtToAssets'];
 
   return (
     <div className="dashboard-body p-5">
@@ -20,14 +20,24 @@ export default function Body() {
           </div>
         </div>
         <div className="metric-row">
-          <KeyMetricCard className="metric-block" isPositive={true} str={{metricLabel: "Net Income", metricValue: "$97.5B", metricChange: "+6.3% YoY"}} />
-          <KeyMetricCard className="metric-block" isPositive={true} str={{metricLabel: "EPS", metricValue: "6.14", metricChange: "+9.2% YoY"}} />
-          <KeyMetricCard className="metric-block" isPositive={false} str={{metricLabel: "P/E Ratio", metricValue: "28.4", metricChange: "-2.1% YoY"}} />
-          <KeyMetricCard className="metric-block" isPositive={false} str={{metricLabel: "Debt to Assets", metricValue: "0.32", metricChange: "-0.05% YoY"}} />
+          {metrics && metrics
+            .filter((metric) => summaryMetrics.includes(metric.id))
+            .map((keyMetric) => (
+              <KeyMetricCard
+                key={keyMetric.id}
+                className="metric-block"
+                isPositive={keyMetric.isPositive}
+                label={keyMetric.subTitle}
+                value={keyMetric.formattedCurrentValue}
+                change={keyMetric.periodChange}
+              />
+            ))
+          }
         </div>
       </div>
-      {hasData && <TrendingCardLine data={metrics.find((item) => item.id === "roe")} isLoading={isLoading} />}
-      {hasData && <TrendingCardLine data={metrics.find((item) => item.id === "eps")} isLoading={isLoading} />}
+      {metrics && metrics.map((item) => (
+        <TrendingCard key={item.id} data={item} isLoading={isLoading} />
+      ))}
     </div>
   );
 }

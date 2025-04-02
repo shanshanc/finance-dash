@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import useSWR from 'swr'
 import FinancialService from '../services/financialService';
-import { METRIC_TYPES } from '../constants/metricTypes';
+import { METRIC_TYPES } from '../constants/dataTypes';
 
 async function fetcher(key) {
   const [_, symbol, period] = key;
@@ -56,7 +56,8 @@ export const useFinancialData = (symbol, period) => {
         periodChange: periodChange.toFixed(2),
         isPositive: periodChange >= 0,
         // Format the current value based on the metric type
-        formattedCurrentValue: formatMetricValue(currentValue, item.id)
+        formattedCurrentValue: formatMetricValue(currentValue, item.id),
+        periodType: period
       };
     });
 

@@ -24,3 +24,8 @@ export const METRIC_TYPES = {
   // EPS (3 decimal places)
   eps: ['eps']
 }; 
+
+export const CHART_TYPES = {
+  BAR: ['netIncome', 'revenue'],
+  LINE: ['roe', 'peRatio', 'eps', 'debtToAssets']
+}
