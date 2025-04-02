@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import useSWR from 'swr';
+import useSWR from 'swr'
 import FinancialService from '../services/financialService';
 import { METRIC_TYPES } from '../constants/metricTypes';
 

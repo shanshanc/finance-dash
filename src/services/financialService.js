@@ -1,4 +1,5 @@
-const WORKER_BASE_URL = import.meta.env.VITE_WORKER_BASE_URL
+import { config } from '../config';
+import { staticData } from '../data/staticData';
 
 /**
  * Service class for handling financial data operations
@@ -13,7 +14,13 @@ class FinancialService {
    */
   static async getFinancialMetrics(symbol, period) {
     // console.log('getFinancialMetrics import url: ', import.meta.env.VITE_WORKER_BASE_URL);
+
+    if (config.dataSource === 'static') {
+      return staticData;
+    }
+
     try {
+      const WORKER_BASE_URL = import.meta.env.VITE_WORKER_BASE_URL
       const url = `${WORKER_BASE_URL}?symbol=${symbol}&period=${period}`;
       const response = await fetch(url);
       
