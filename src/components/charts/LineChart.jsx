@@ -43,7 +43,7 @@ const LineChart = ({ data }) => {
     plugins: {
       title: {
         display: false,
-        text: "AAPL Key Metrics"
+        text: "Key Metrics"
       },
       legend: {
         display: false

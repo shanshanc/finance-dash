@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { DashboardContext } from "../context/DashboardContext";
+import { DashboardContext } from "../../context/DashboardContext";
 
-import KeyMetricCard from "../components/dashboard/KeyMetricCard";
-import TrendingCardLine from "../components/dashboard/TrendingCardLine";
-import './DashboardBody.css';
+import KeyMetricCard from "./KeyMetricCard";
+import TrendingCardLine from "./TrendingCardLine";
+import './Body.css';
 
-export default function DashboardBody() {
+export default function Body() {
   const { metrics, isLoading } = useContext(DashboardContext);
 
   const hasData = metrics && metrics.length > 0;
@@ -15,7 +15,7 @@ export default function DashboardBody() {
       <div className="card full-width key-metrics-row">
         <div className="card-header">
           <div>
-            <h3 className="card-title text-base m-0 font-semibold text-left">Financial Overview</h3>
+            <h3 className="card-title text-base m-0 font-semibold text-left">Overview</h3>
             <p className="card-subtitle text-subtitle text-sm m-0 font-normal text-left">Year-end 2024</p>
           </div>
         </div>
@@ -28,7 +28,6 @@ export default function DashboardBody() {
       </div>
       {hasData && <TrendingCardLine data={metrics.find((item) => item.id === "roe")} isLoading={isLoading} />}
       {hasData && <TrendingCardLine data={metrics.find((item) => item.id === "eps")} isLoading={isLoading} />}
-      
     </div>
   );
 }

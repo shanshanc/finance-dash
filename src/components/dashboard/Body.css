@@ -8,7 +8,7 @@
 /* 4 cards per row by default */
 .metric-row > .metric-block {
   flex: 1 1 calc(25% - 1rem);
-  /* min-width: 200px; */
+  min-width: 200px;
 }
 
 /* 2 cards per row on medium screens */

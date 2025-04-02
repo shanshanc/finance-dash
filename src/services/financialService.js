@@ -7,8 +7,8 @@ import { staticData } from '../data/staticData';
 class FinancialService {
   /**
    * Fetches financial metrics for a given stock symbol
-   * @param {string} [symbol='AAPL'] - Stock symbol (e.g., 'AAPL')
-   * @param {string} [period='annual'] - Data period ('annual' or 'quarterly')
+   * @param {string} Stock symbol (e.g., 'AAPL')
+   * @param {string} Data period ('annual' or 'quarterly')
    * @returns {Promise<Array>} Array of financial metrics
    * @throws {Error} If the fetch operation fails
    */
