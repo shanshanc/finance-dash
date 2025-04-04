@@ -21,7 +21,7 @@ class FinancialService {
 
     try {
       const WORKER_BASE_URL = import.meta.env.VITE_WORKER_BASE_URL
-      const url = `${WORKER_BASE_URL}?symbol=${symbol}&period=${period}`;
+      const url = `${WORKER_BASE_URL}/${symbol}?period=${period}`;
       const response = await fetch(url);
       
       return response.json();
