@@ -1,3 +1,4 @@
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const KeyMetricCard = ({ isPositive, label, value, change }) => {
   return (

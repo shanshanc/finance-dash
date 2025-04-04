@@ -90,7 +90,7 @@ const Header = ({ market }) => {
   return (
       <div className="header">
           <div className="dashboard-header flex flex-col md:flex-row justify-between items-center rounded-lg px-6 py-4 bg-primary text-white gap-4">
-          <h2 className="text-2xl font-bold">{market === 'TW' ? 'TW' : 'US'} Stock Market</h2>
+          <h2 className="text-2xl font-bold">{`${symbol} - `}{market === 'TW' ? 'TW' : 'US'} Stock Market</h2>
           <form className="dashboard-controls flex flex-col md:flex-row gap-4 w-full md:w-auto" onSubmit={handleSubmit}>
             <div className={`filter-container ${isListExpanded ? 'isListOpen' : ''}`}>
               <input 

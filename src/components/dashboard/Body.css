@@ -11,6 +11,11 @@
   min-width: 200px;
 }
 
+.metric-row > span {
+  width: 100%;
+  border: none;
+}
+
 /* 2 cards per row on medium screens */
 @media (max-width: 1024px) {
   .metric-row > .metric-block {
