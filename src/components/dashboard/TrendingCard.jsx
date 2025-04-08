@@ -8,7 +8,7 @@ const TrendingCard = ({ data, isLoading }) => {
   const chartType = CHART_TYPES.LINE.includes(data.id) ? 'line' : 'bar';
 
   return (
-    <div className="card third-width">
+    <div className="card metric-block col-span-12 lg:col-span-4">
       <div className="card-header">
         <div>
           <h3 className="card-title text-base m-0 font-semibold text-left">{data.subTitle}</h3>
